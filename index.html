@@ -1,0 +1,460 @@
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>晟銘窗簾 風格提案</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@400;500&display=swap">
+<style>
+/* 世界觀：名片與 logo 的白底細線。刻意只做淺色一種樣子（品牌就是白紙），所有顏色都明確指定。
+   A 名片：純白、襯線、文字標籤。B 紗簾：淡綠白、無襯線、外框標籤、紗簾光影。C 拉簾：分類是一片片布幅。 */
+:root{
+  color-scheme:light;
+  --paper:#ffffff; --ink:#4b4b48; --mute:#6e6e68; --hair:#e4e4de;
+  --sage:#87a06a; --gold:#c4a565; --rose:#e4bfc3; --rose-ink:#a8606a;
+  --veil:rgba(255,255,255,.84);
+  --serif:"Noto Serif TC","Songti TC",serif; --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --latin:"Cormorant Garamond","Times New Roman",serif;
+  --head:var(--serif); --ease:cubic-bezier(.16,1,.3,1);
+  --gutter-l:max(20px,env(safe-area-inset-left,0px)); --gutter-r:max(20px,env(safe-area-inset-right,0px));
+  --top:env(safe-area-inset-top,0px);
+}
+body[data-v="b"]{--paper:#f6f7f2; --ink:#3e4338; --mute:#666c5d; --hair:#dde1d3; --veil:rgba(246,247,242,.7); --head:var(--sans)}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.8;-webkit-font-smoothing:antialiased;overflow:hidden}
+::selection{background:var(--rose);color:var(--ink)}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:1.5px solid var(--gold);outline-offset:4px;border-radius:2px}
+h2,h3,p{margin:0}
+img{max-width:100%;display:block}
+
+/* ── 共用：logo 與頁首 ── */
+.logo path{fill:none;stroke-linecap:butt}
+.brand{position:fixed;z-index:30;top:calc(var(--top) + 16px);left:var(--gutter-l);display:flex;align-items:center;gap:10px;opacity:0}
+.brand svg{width:50px;height:40px}
+.brand .word{display:none}
+.brand span{font-family:var(--serif);font-size:15px;letter-spacing:.12em;color:var(--ink);line-height:1.2}
+.brand small{display:block;font-family:var(--latin);font-size:11px;letter-spacing:.2em;color:var(--mute)}
+
+/* ── 開場 ── */
+#intro{position:fixed;inset:0;z-index:40;display:grid;place-items:center;background:var(--paper);pointer-events:auto}
+#intro .center{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:28px;padding-inline:24px;text-align:center}
+#intro svg{width:min(46vw,240px);height:auto}
+#slogan{font-family:var(--head);font-size:clamp(17px,2.2vw,22px);letter-spacing:.24em;color:var(--ink);font-weight:400;line-height:2}
+body[data-v="b"] #slogan{font-weight:300;letter-spacing:.32em}
+#slogan span{display:block}
+#slogan{text-align:left}
+#slogan .l2{padding-left:2em}
+#skip{position:absolute;bottom:calc(28px + env(safe-area-inset-bottom,0px));font-size:12px;letter-spacing:.2em;color:var(--mute)}
+.sheers{position:absolute;inset:0;display:none;pointer-events:none}
+body[data-v="b"] .sheers{display:block}
+.sheers i{position:absolute;top:0;bottom:0;width:50.5%;background:
+  repeating-linear-gradient(90deg,rgba(255,255,255,.0) 0 14px,rgba(255,255,255,.55) 22px,rgba(255,255,255,0) 34px),var(--paper)}
+.sheers i:first-child{left:0}.sheers i:last-child{right:0}
+
+/* ── 首頁背景照 ── */
+.home-bg{position:fixed;inset:0;z-index:0}
+.home-bg img{width:100%;height:100%;object-fit:cover}
+.home-bg::after{content:"";position:absolute;inset:0;background:var(--veil)}
+.sway{position:absolute;inset:0;display:none;background:repeating-linear-gradient(90deg,rgba(255,255,255,0) 0 40px,rgba(255,255,255,.5) 70px,rgba(255,255,255,0) 110px);background-size:220px 100%;animation:sway 14s ease-in-out infinite alternate;z-index:1}
+body[data-v="b"] .sway{display:block}
+@keyframes sway{to{background-position:220px 0}}
+.bg-note{position:absolute;right:var(--gutter-r);bottom:calc(96px + env(safe-area-inset-bottom,0px));z-index:2;font-size:11px;letter-spacing:.14em;color:var(--mute)}
+
+/* ── A／B：標籤 ── */
+#tagmode{display:none}
+body[data-v="a"] #tagmode,body[data-v="b"] #tagmode{display:block}
+#tags{position:fixed;z-index:20;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(14px,3vh,26px);pointer-events:none}
+#tags button{pointer-events:auto;display:flex;flex-direction:column;align-items:center;gap:0;padding:4px 10px;line-height:1.3;white-space:nowrap}
+#tags .zh{font-family:var(--head);font-size:clamp(22px,3vw,30px);letter-spacing:.3em;margin-right:-.3em;color:var(--ink);transition:color .4s}
+#tags .en{font-family:var(--latin);font-style:italic;font-size:14px;letter-spacing:.08em;color:var(--mute)}
+#tags button:hover .zh{color:var(--sage)}
+body[data-v="b"] #tags button{border:1px solid var(--hair);border-radius:99px;padding:10px 28px;background:rgba(255,255,255,.6);flex-direction:row;gap:12px;align-items:baseline}
+body[data-v="b"] #tags .zh{font-weight:300;font-size:clamp(18px,2.2vw,22px)}
+body[data-v="b"] #tags button:hover{border-color:var(--sage)}
+#tags button[aria-selected="true"] .zh{color:var(--sage)}
+body[data-v="b"] #tags button[aria-selected="true"]{border-color:var(--sage);background:#fff}
+
+/* 退到左側 */
+body.open #tags{inset:auto;top:calc(var(--top) + 132px);left:var(--gutter-l);width:200px;align-items:flex-start;justify-content:flex-start;gap:18px}
+body.open #tags button{align-items:flex-start}
+body.open #tags .zh{font-size:17px;letter-spacing:.24em}
+body.open #tags .en{font-size:12px}
+body[data-v="a"].open #tags button[aria-selected="true"]::before{content:"";position:absolute;left:-14px;top:12px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+body.open #tags button{position:relative}
+body[data-v="b"].open #tags button{padding:6px 18px}
+body[data-v="b"].open #tags .en{display:none}
+
+#panel{position:fixed;z-index:10;inset:0;overflow-y:auto;padding:calc(var(--top) + 128px) var(--gutter-r) 120px calc(var(--gutter-l) + 260px);visibility:hidden;scrollbar-width:thin;scrollbar-color:var(--hair) transparent}
+body.open #panel{visibility:visible}
+body.open .home-line{opacity:0 !important;visibility:hidden !important}
+
+/* 手機：退到上方 */
+@media (max-width:760px){
+  body.open #tags{top:calc(var(--top) + 72px);left:0;right:0;width:auto;flex-direction:row;gap:6px;overflow-x:auto;padding:6px var(--gutter-r) 10px var(--gutter-l);background:var(--paper);border-bottom:1px solid var(--hair);scrollbar-width:none}
+  body.open #tags::-webkit-scrollbar{display:none}
+  body.open #tags .en{display:none}
+  body.open #tags .zh{font-size:15px;letter-spacing:.14em}
+  body[data-v="a"].open #tags button[aria-selected="true"]::before{left:50%;top:auto;bottom:-6px;margin-left:-3px}
+  #panel{padding:calc(var(--top) + 140px) var(--gutter-r) 120px var(--gutter-l)}
+}
+
+/* ── 內容（四個分頁共用） ── */
+.tab{display:none;max-width:860px;flex-direction:column;gap:32px}
+.tab.on{display:flex}
+.tab h2{font-family:var(--head);font-weight:400;font-size:clamp(24px,3.4vw,34px);letter-spacing:.14em;line-height:1.5;text-wrap:balance}
+body[data-v="b"] .tab h2{font-weight:300}
+.lede{color:var(--mute);font-size:15px;max-width:34em}
+.shots{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.shots figure{margin:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.shots figure:nth-child(1){grid-column:span 4}
+.shots figure:nth-child(2){grid-column:span 2}
+.shots figure:nth-child(n+3){grid-column:span 3}
+.shots img,.ph{width:100%;aspect-ratio:4/3;object-fit:cover}
+.shots figure:nth-child(2) .ph{aspect-ratio:auto;flex:1}
+figcaption{font-size:12px;letter-spacing:.1em;color:var(--mute)}
+.ph{display:grid;place-items:center;text-align:center;border:1px dashed var(--rose);background:#fdf6f7;color:var(--rose-ink);font-size:12px;letter-spacing:.08em;padding:12px;line-height:1.7}
+.types{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:40px}
+.types li{display:grid;grid-template-columns:7.5em 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--hair);align-items:baseline}
+.types b{font-family:var(--head);font-weight:400;font-size:17px;letter-spacing:.12em}
+.types span{font-size:14px;color:var(--mute);line-height:1.7}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;position:relative}
+.steps::before{content:"";position:absolute;left:0;right:0;top:9px;height:1px;background:var(--hair)}
+.steps li{position:relative;padding:32px 12px 0 0;display:flex;flex-direction:column;gap:4px}
+.steps li::before{content:"";position:absolute;top:4px;left:0;width:11px;height:11px;border-radius:50%;border:1px solid var(--sage);background:var(--paper)}
+.steps li:last-child::before{background:var(--sage)}
+.steps b{font-family:var(--head);font-weight:400;font-size:16px;letter-spacing:.1em}
+.steps span{font-size:13px;color:var(--mute);line-height:1.7}
+.blank{border-bottom:1px dashed var(--rose);color:var(--rose-ink);padding:0 4px}
+.about{display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:start}
+.about .ph{aspect-ratio:3/4}
+.quote{font-family:var(--head);font-size:18px;letter-spacing:.08em;line-height:2}
+.rows{display:grid;grid-template-columns:4.5em 1fr;gap:10px 16px;font-size:15px;margin-top:8px}
+.rows dt{color:var(--mute);font-size:13px;letter-spacing:.14em;padding-top:2px}
+.rows dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.cta{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;border:1px solid var(--ink);padding:12px 28px;letter-spacing:.2em;font-size:14px;text-decoration:none;transition:background .3s,color .3s}
+.cta:hover{background:var(--ink);color:var(--paper)}
+body[data-v="b"] .cta{border-radius:99px;border-color:var(--sage);background:var(--sage);color:#fff}
+body[data-v="b"] .cta:hover{background:#6f8955}
+@media (max-width:760px){
+  .shots{grid-template-columns:1fr 1fr}
+  .shots figure:nth-child(n){grid-column:span 2}
+  .shots figure:nth-child(n+3){grid-column:span 1}
+  .shots figure:nth-child(2) .ph{aspect-ratio:4/3}
+  .types{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr;gap:0}
+  .steps::before{left:5px;right:auto;top:0;bottom:0;width:1px;height:auto}
+  .steps li{padding:0 0 22px 32px}
+  .about{grid-template-columns:1fr;gap:24px}
+  .about .ph{aspect-ratio:4/3;max-width:260px}
+}
+
+/* ── 首頁底部聯絡 ── */
+.home-line{position:fixed;z-index:15;left:0;right:0;bottom:0;display:flex;justify-content:center;flex-wrap:wrap;gap:6px 22px;padding:16px var(--gutter-r) calc(18px + env(safe-area-inset-bottom,0px)) var(--gutter-l);font-size:13px;letter-spacing:.16em;color:var(--ink);transition:opacity .5s}
+.home-line a{text-decoration:none;border-bottom:1px solid var(--hair)}
+.home-line a:hover{border-color:var(--sage)}
+
+/* ── C：拉簾 ── */
+#drapemode{display:none}
+body[data-v="c"] #drapemode{display:block}
+body[data-v="c"] .home-bg,body[data-v="c"] .home-line{display:none}
+#drapes{position:fixed;z-index:5;left:0;right:0;bottom:0;top:calc(var(--top) + 76px);display:flex;gap:2px;padding:0 var(--gutter-r) calc(56px + env(safe-area-inset-bottom,0px)) var(--gutter-l)}
+.drape{position:relative;flex:1 1 0;min-width:0;overflow:hidden;background-color:#ece9e2;background-repeat:no-repeat}
+.drape::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.55),rgba(255,255,255,.15) 30%,rgba(0,0,0,.06) 65%,rgba(255,255,255,.4));transition:opacity .6s}
+.drape>button{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#fff;text-shadow:0 1px 14px rgba(0,0,0,.25)}
+.drape .zh{font-family:var(--serif);writing-mode:vertical-rl;font-size:clamp(20px,2.4vw,28px);letter-spacing:.5em}
+.drape .en{font-family:var(--latin);font-style:italic;font-size:14px;letter-spacing:.1em}
+.drape .body{position:absolute;inset:0;z-index:3;overflow-y:auto;background:var(--paper);padding:48px clamp(20px,4vw,56px) 64px;opacity:0;visibility:hidden}
+.drape.on .body{visibility:visible}
+.drape.on>button{pointer-events:none}
+#drapes.opened .drape:not(.on) .zh{font-size:15px;letter-spacing:.3em}
+#drapes.opened .drape:not(.on) .en{display:none}
+.drape-foot{position:fixed;z-index:6;left:0;right:0;bottom:0;display:flex;justify-content:center;flex-wrap:wrap;gap:4px 22px;padding:14px var(--gutter-r) calc(14px + env(safe-area-inset-bottom,0px)) var(--gutter-l);font-size:13px;letter-spacing:.16em}
+.drape-foot a{text-decoration:none;border-bottom:1px solid var(--hair)}
+@media (max-width:760px){
+  #drapes{flex-direction:column;top:calc(var(--top) + 72px)}
+  .drape{flex:1 1 0;min-height:0}
+  .drape>button{flex-direction:row;gap:12px}
+  .drape .zh{writing-mode:horizontal-tb;letter-spacing:.4em;font-size:20px}
+  #drapes.opened .drape:not(.on) .zh{font-size:14px}
+  .drape .body{padding:28px 20px 48px}
+}
+
+/* ── 版本切換（審稿用） ── */
+.vswitch{position:fixed;z-index:50;right:var(--gutter-r);bottom:calc(64px + env(safe-area-inset-bottom,0px));display:flex;gap:4px;align-items:center;background:#2f322b;color:#f2f2ec;border-radius:99px;padding:4px;font-size:12px;letter-spacing:.06em;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.vswitch button{padding:5px 11px;border-radius:99px;color:#f2f2ec}
+.vswitch button[aria-pressed="true"]{background:#f2f2ec;color:#2f322b}
+.vswitch button:focus-visible{outline-color:var(--gold)}
+@media (prefers-reduced-motion:reduce){.sway{animation:none}}
+</style>
+
+<header><a class="brand" href="#home" id="brand" aria-label="回到首頁"><svg class="logo" viewBox="110 240 990 790" aria-hidden="true"></svg><span>晟銘窗簾<small>Charming Curtain</small></span></a></header>
+
+<div id="intro" aria-hidden="true">
+  <div class="sheers"><i></i><i></i></div>
+  <div class="center">
+    <svg class="logo" id="introLogo" viewBox="110 240 990 790"></svg>
+    <p id="slogan" aria-label="讓每一道光線，都成為家裡最美的風景"><span class="l1">讓每一道光線，</span><span class="l2">都成為家裡最美的風景</span></p>
+  </div>
+  <button id="skip" type="button">略過</button>
+</div>
+
+<!-- A／B：標籤 -->
+<div id="tagmode">
+  <div class="home-bg"><img src="assets/hero-honeycomb.jpg" alt=""><div class="sway"></div><span class="bg-note">蜂巢簾｜實拍</span></div>
+  <nav id="tags" role="tablist" aria-label="分類"></nav>
+  <main id="panel"></main>
+  <p class="home-line"><span>高雄橋頭</span><a href="tel:0919773142">0919-773-142</a><a href="#about" data-go="about">LINE 預約丈量</a></p>
+</div>
+
+<!-- C：拉簾 -->
+<div id="drapemode">
+  <div id="drapes"></div>
+  <p class="drape-foot"><span>高雄橋頭</span><a href="tel:0919773142">0919-773-142</a><a href="#about" data-go="about">LINE 預約丈量</a></p>
+</div>
+
+<!-- 分頁內容（只寫一次，JS 依版本搬到對應位置） -->
+<div id="store" hidden>
+  <article class="tab" data-tab="works">
+    <h2>光，落在布上的樣子</h2>
+    <div class="shots">
+      <figure><img src="assets/hero-honeycomb.jpg" alt="灰白色蜂巢簾近拍，側光打在摺面上"><figcaption>蜂巢簾｜實拍</figcaption></figure>
+      <figure><div class="ph">落地紗簾＋遮光簾<br>情境示意｜待放原檔</div><figcaption>情境示意</figcaption></figure>
+      <figure><div class="ph">斑馬簾<br>情境示意｜待放原檔</div><figcaption>情境示意</figcaption></figure>
+      <figure><div class="ph">咖啡色蜂巢簾<br>情境示意｜待放原檔</div><figcaption>情境示意</figcaption></figure>
+    </div>
+    <p class="lede">圖片為情境示意。布料的顏色與透光，丈量時帶樣本到府，在你家的光線下看。</p>
+  </article>
+  <article class="tab" data-tab="types">
+    <h2>從你的窗開始選</h2>
+    <ul class="types">
+      <li><b>蛇型簾</b><span>S 形摺浪，俐落，落地窗首選</span></li>
+      <li><b>打摺布簾</b><span>垂墜厚實，空間更溫暖</span></li>
+      <li><b>紗簾</b><span>留住天光，擋住視線</span></li>
+      <li><b>調光簾</b><span>兩層條紋錯開，隨手調亮暗</span></li>
+      <li><b>蜂巢簾</b><span>蜂巢結構隔熱，西曬房適用</span></li>
+      <li><b>捲簾</b><span>收起幾乎隱形，好清潔</span></li>
+      <li><b>羅馬簾</b><span>層層上收，布的質感、省空間</span></li>
+      <li><b>百葉</b><span>木或鋁，葉片調角度</span></li>
+    </ul>
+  </article>
+  <article class="tab" data-tab="flow">
+    <h2>從預約到裝好</h2>
+    <ol class="steps">
+      <li><b>LINE 預約</b><span>傳窗戶照片</span></li>
+      <li><b>到府丈量</b><span>帶樣本上門</span></li>
+      <li><b>挑選布料</b><span>在你家光線下比</span></li>
+      <li><b>報價</b><span>訂金 <span class="blank">__%</span></span></li>
+      <li><b>製作</b><span>約 <span class="blank">__ 天</span></span></li>
+      <li><b>安裝</b><span>保固 <span class="blank">__ 年</span></span></li>
+    </ol>
+  </article>
+  <article class="tab" data-tab="about">
+    <div class="about">
+      <div class="ph">負責人工作照<br>待提供</div>
+      <div style="display:flex;flex-direction:column;gap:22px;min-width:0">
+        <h2>張佳琪</h2>
+        <p class="quote"><span class="blank">一句話：為什麼做窗簾、最在意什麼</span></p>
+        <dl class="rows">
+          <dt>LINE</dt><dd><span class="blank">待提供</span></dd>
+          <dt>電話</dt><dd><a href="tel:0919773142">0919-773-142</a></dd>
+          <dt>地址</dt><dd>高雄市橋頭區新南三街32號　<a href="https://www.google.com/maps/search/?api=1&query=%E9%AB%98%E9%9B%84%E5%B8%82%E6%A9%8B%E9%A0%AD%E5%8D%80%E6%96%B0%E5%8D%97%E4%B8%89%E8%A1%9732%E8%99%9F" target="_blank" rel="noopener">地圖</a></dd>
+          <dt>範圍</dt><dd>高雄及周邊</dd>
+        </dl>
+        <a class="cta" href="tel:0919773142">預約到府丈量</a>
+      </div>
+    </div>
+  </article>
+</div>
+
+<div class="vswitch" role="group" aria-label="切換提案版本">
+  <button type="button" data-v="a">A 名片</button>
+  <button type="button" data-v="b">B 紗簾</button>
+  <button type="button" data-v="c">C 拉簾</button>
+  <button type="button" id="replay" aria-label="重播開場動畫">↻</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script>
+gsap.registerPlugin(Flip,DrawSVGPlugin,SplitText);
+const LOGO=`<path class="arc" stroke="#e9c6c7" stroke-width="7.91" d="M455.2 542.7A105.7 105.7 0 1 1 455.6 431.3"/>
+<path class="arc" stroke="#e9c6c7" stroke-width="7.90" d="M483.2 559.0A136.2 136.2 0 1 1 483.8 415.4"/>
+<path class="arc" stroke="#c7ad6f" stroke-width="7.90" d="M509.7 574.4A165.1 165.1 0 1 1 510.6 400.3"/>
+<path class="arc" stroke="#c7ad6f" stroke-width="7.89" d="M537.2 590.4A195.0 195.0 0 1 1 538.3 384.8"/>
+<path class="arc" stroke="#8ea570" stroke-width="7.90" d="M563.4 605.6A223.5 223.5 0 1 1 564.8 369.9"/>
+<path class="arc" stroke="#8ea570" stroke-width="7.89" d="M588.3 620.1A250.7 250.7 0 1 1 589.9 355.8"/>
+<path class="arc" stroke="#8ea570" stroke-width="7.89" d="M503.5 535.4A311.6 311.6 0 1 1 505.6 863.9"/>
+<path class="arc" stroke="#8ea570" stroke-width="7.89" d="M531.5 551.1A281.5 281.5 0 1 1 533.3 847.9"/>
+<path class="arc" stroke="#c7ad6f" stroke-width="7.89" d="M560.0 567.1A250.7 250.7 0 1 1 561.6 831.4"/>
+<path class="arc" stroke="#c7ad6f" stroke-width="7.90" d="M585.2 581.2A223.5 223.5 0 1 1 586.6 816.9"/>
+<path class="arc" stroke="#e9c6c7" stroke-width="7.90" d="M611.6 596.1A195.0 195.0 0 1 1 612.8 801.7"/>
+<path class="arc" stroke="#e9c6c7" stroke-width="7.90" d="M639.3 611.6A165.1 165.1 0 1 1 640.2 785.7"/>
+<g class="word"><path fill="#8ea570" d="M 649.742188 668.601562 C 649.742188 658.40625 656.566406 652.605469 665.324219 652.605469 C 668.863281 652.605469 671.367188 653.390625 674 654.910156 L 674 661.859375 L 671.945312 661.859375 L 670.339844 654.949219 C 669.027344 654.332031 667.667969 654.085938 666.066406 654.085938 C 659.691406 654.085938 654.964844 658.980469 654.964844 668.476562 C 654.964844 678.015625 659.691406 682.785156 666.066406 682.785156 C 667.710938 682.785156 669.148438 682.496094 670.628906 681.839844 L 672.273438 675.058594 L 674.332031 675.058594 L 674.332031 681.96875 C 671.65625 683.527344 668.820312 684.308594 665.285156 684.308594 C 656.320312 684.308594 649.742188 678.714844 649.742188 668.601562 "/><path fill="#8ea570" d="M 692.109375 683.566406 L 692.109375 682.375 L 695.191406 682.046875 L 695.277344 674.027344 L 695.277344 668.808594 C 695.277344 665.105469 693.917969 663.789062 691.78125 663.789062 C 690.175781 663.789062 688.121094 664.613281 685.816406 666.875 L 685.816406 674.027344 C 685.816406 676.289062 685.859375 679.746094 685.902344 682.085938 L 688.699219 682.375 L 688.699219 683.566406 L 677.964844 683.566406 L 677.964844 682.375 L 681.132812 682.046875 L 681.210938 674.027344 L 681.210938 652.894531 L 677.800781 652.6875 L 677.800781 651.582031 L 685.28125 650.140625 L 685.859375 650.511719 L 685.734375 656.964844 L 685.734375 665.644531 C 688.367188 662.554688 690.875 661.246094 693.796875 661.246094 C 697.535156 661.246094 699.917969 663.5 699.917969 669.136719 L 699.917969 674.027344 L 700.003906 682.085938 L 702.882812 682.375 L 702.882812 683.566406 Z M 692.109375 683.566406 "/><path fill="#8ea570" d="M 718.929688 671.355469 C 717.488281 671.722656 716.09375 672.136719 715.066406 672.546875 C 711.898438 673.785156 710.457031 675.59375 710.457031 678.097656 C 710.457031 680.648438 711.898438 681.878906 713.992188 681.878906 C 715.351562 681.878906 716.667969 681.304688 718.929688 679.089844 Z M 719.011719 680.402344 C 716.707031 682.910156 714.980469 684.222656 711.898438 684.222656 C 708.527344 684.222656 706.101562 682.207031 706.101562 678.757812 C 706.101562 675.386719 708.074219 673.289062 713.992188 671.601562 C 715.472656 671.152344 717.242188 670.699219 718.929688 670.242188 L 718.929688 668.273438 C 718.929688 663.835938 717.652344 662.597656 714.445312 662.597656 C 713.582031 662.597656 712.71875 662.722656 711.773438 663.011719 L 711.324219 665.972656 C 711.117188 667.945312 710.128906 668.683594 708.9375 668.683594 C 707.785156 668.683594 706.964844 668.105469 706.714844 666.957031 C 707.335938 663.421875 710.582031 661.242188 715.886719 661.242188 C 721.066406 661.242188 723.410156 663.5 723.410156 668.929688 L 723.410156 679.457031 C 723.410156 681.632812 723.945312 682.296875 724.972656 682.296875 C 725.628906 682.296875 726.082031 682.007812 726.824219 681.054688 L 727.480469 681.679688 C 726.535156 683.402344 725.179688 684.183594 723.164062 684.183594 C 720.78125 684.183594 719.464844 682.785156 719.011719 680.402344 "/><path fill="#8ea570" d="M 729.183594 683.566406 L 729.183594 682.375 L 732.347656 682.046875 L 732.429688 674.027344 L 732.429688 671.195312 C 732.429688 668.394531 732.390625 666.628906 732.308594 664.613281 L 728.894531 664.363281 L 728.894531 663.339844 L 736.253906 661.324219 L 736.789062 661.691406 L 737.078125 667.324219 C 738.394531 663.5 741.148438 661.246094 743.78125 661.246094 C 745.503906 661.246094 746.941406 661.941406 747.316406 663.628906 C 747.273438 665.226562 746.53125 666.339844 744.847656 666.339844 C 743.613281 666.339844 742.792969 665.644531 741.804688 664.453125 L 741.476562 664.078125 C 739.5 665.1875 738.144531 667.121094 737.078125 670.289062 L 737.078125 674.027344 L 737.15625 681.96875 L 741.023438 682.375 L 741.023438 683.566406 Z M 729.183594 683.566406 "/><path fill="#8ea570" d="M 776.515625 683.566406 L 776.515625 682.375 L 779.519531 682.046875 L 779.597656 674.027344 L 779.597656 669.011719 C 779.597656 665.066406 778.40625 663.789062 776.1875 663.789062 C 774.417969 663.789062 772.527344 664.691406 770.433594 666.875 C 770.511719 667.53125 770.554688 668.273438 770.554688 669.050781 L 770.554688 674.027344 L 770.636719 682.085938 L 773.515625 682.375 L 773.515625 683.566406 L 762.867188 683.566406 L 762.867188 682.375 L 765.949219 682.046875 L 766.035156 674.027344 L 766.035156 669.011719 C 766.035156 665.226562 764.839844 663.789062 762.742188 663.789062 C 760.972656 663.789062 759.042969 664.859375 756.988281 666.957031 L 756.988281 674.027344 L 757.066406 682.085938 L 759.863281 682.375 L 759.863281 683.566406 L 749.09375 683.566406 L 749.09375 682.375 L 752.257812 682.046875 L 752.339844 674.027344 L 752.339844 671.152344 C 752.339844 668.394531 752.339844 666.628906 752.214844 664.570312 L 748.804688 664.324219 L 748.804688 663.339844 L 756.164062 661.324219 L 756.699219 661.691406 L 756.941406 665.554688 C 759.246094 662.722656 761.714844 661.246094 764.59375 661.246094 C 767.46875 661.246094 769.40625 662.554688 770.183594 665.601562 C 772.609375 662.554688 775.160156 661.246094 777.996094 661.246094 C 782.066406 661.246094 784.164062 663.585938 784.164062 669.136719 L 784.164062 674.027344 L 784.246094 682.085938 L 787.125 682.375 L 787.125 683.566406 Z M 776.515625 683.566406 "/><path fill="#8ea570" d="M 792.570312 653.925781 C 792.570312 652.359375 793.847656 651.207031 795.410156 651.207031 C 796.929688 651.207031 798.246094 652.359375 798.246094 653.925781 C 798.246094 655.527344 796.929688 656.636719 795.410156 656.636719 C 793.847656 656.636719 792.570312 655.527344 792.570312 653.925781 M 790.109375 683.566406 L 790.109375 682.375 L 793.273438 682.046875 L 793.355469 674.027344 L 793.355469 671.234375 C 793.355469 668.476562 793.3125 666.546875 793.230469 664.53125 L 789.777344 664.285156 L 789.777344 663.257812 L 797.589844 661.324219 L 798.082031 661.691406 L 797.957031 667.738281 L 797.957031 674.027344 C 797.957031 676.289062 798 679.746094 798.042969 682.085938 L 800.960938 682.375 L 800.960938 683.566406 Z M 790.109375 683.566406 "/><path fill="#8ea570" d="M 818.15625 683.566406 L 818.15625 682.375 L 821.28125 682.046875 L 821.363281 674.027344 L 821.363281 668.808594 C 821.363281 665.105469 820.132812 663.789062 817.953125 663.789062 C 816.429688 663.789062 814.25 664.613281 811.949219 666.875 L 811.949219 674.027344 L 812.027344 682.085938 L 814.824219 682.375 L 814.824219 683.566406 L 804.054688 683.566406 L 804.054688 682.375 L 807.21875 682.046875 L 807.300781 674.027344 L 807.300781 671.195312 C 807.300781 668.433594 807.261719 666.628906 807.179688 664.613281 L 803.765625 664.363281 L 803.765625 663.339844 L 811.125 661.324219 L 811.660156 661.691406 L 811.90625 665.554688 C 814.660156 662.394531 817.210938 661.246094 819.925781 661.246094 C 823.625 661.246094 825.96875 663.585938 825.96875 669.050781 L 825.96875 674.027344 L 826.050781 682.085938 L 828.96875 682.375 L 828.96875 683.566406 Z M 818.15625 683.566406 "/><path fill="#8ea570" d="M 845.636719 668.683594 C 845.636719 664.859375 843.910156 662.515625 841.277344 662.515625 C 838.523438 662.515625 836.835938 664.898438 836.835938 668.683594 C 836.835938 672.386719 838.441406 674.808594 841.195312 674.808594 C 843.953125 674.808594 845.636719 672.386719 845.636719 668.683594 M 834.703125 688.046875 C 834.703125 691.054688 836.878906 692.613281 840.660156 692.613281 C 846.296875 692.613281 849.128906 690.558594 849.128906 687.511719 C 849.128906 685.871094 848.144531 684.3125 844.9375 684.3125 L 840.042969 684.3125 C 838.523438 684.3125 837.578125 684.3125 836.671875 684.101562 C 835.316406 685.335938 834.703125 686.40625 834.703125 688.046875 M 837 675.304688 C 836.140625 676.328125 835.769531 677.074219 835.769531 678.136719 C 835.769531 679.535156 836.671875 680.402344 838.890625 680.402344 L 844.9375 680.402344 C 850.570312 680.402344 852.957031 682.664062 852.957031 686.199219 C 852.957031 690.269531 848.554688 694.214844 840.582031 694.214844 C 833.878906 694.214844 831.617188 691.871094 831.617188 688.828125 C 831.617188 686.695312 833.015625 685.007812 835.851562 683.734375 C 833.960938 683.070312 832.972656 681.800781 832.972656 679.992188 C 832.972656 678.304688 833.835938 676.703125 836.222656 674.929688 C 833.878906 673.65625 832.601562 671.441406 832.601562 668.683594 C 832.601562 664.285156 835.683594 661.242188 841.234375 661.242188 C 843.910156 661.242188 845.964844 661.941406 847.363281 663.132812 L 852.546875 661.324219 L 853.242188 661.773438 L 853.242188 664.363281 L 848.351562 664.074219 C 849.339844 665.316406 849.832031 666.875 849.832031 668.683594 C 849.832031 673 846.746094 676.042969 841.234375 676.042969 C 839.59375 676.042969 838.195312 675.792969 837 675.304688 "/><path fill="#8ea570" d="M 649.742188 717.96875 C 649.742188 707.773438 656.566406 701.972656 665.324219 701.972656 C 668.863281 701.972656 671.367188 702.757812 674 704.277344 L 674 711.226562 L 671.945312 711.226562 L 670.339844 704.316406 C 669.027344 703.699219 667.667969 703.453125 666.066406 703.453125 C 659.691406 703.453125 654.964844 708.347656 654.964844 717.84375 C 654.964844 727.382812 659.691406 732.152344 666.066406 732.152344 C 667.710938 732.152344 669.148438 731.863281 670.628906 731.207031 L 672.273438 724.425781 L 674.332031 724.425781 L 674.332031 731.335938 C 671.65625 732.894531 668.820312 733.679688 665.285156 733.679688 C 656.320312 733.679688 649.742188 728.082031 649.742188 717.96875 "/><path fill="#8ea570" d="M 694.203125 729.273438 C 692.191406 731.824219 689.558594 733.589844 686.394531 733.589844 C 682.402344 733.589844 680.058594 731.414062 680.105469 725.25 L 680.222656 713.363281 L 677.015625 712.867188 L 677.015625 711.761719 L 684.503906 710.898438 L 684.953125 711.347656 L 684.746094 717.105469 L 684.746094 725.496094 C 684.746094 729.480469 686.148438 730.800781 688.570312 730.800781 C 690.628906 730.800781 692.5625 729.6875 694.164062 727.878906 L 694.246094 713.324219 L 691.160156 712.867188 L 691.160156 711.882812 L 698.523438 710.898438 L 698.933594 711.347656 L 698.769531 717.105469 L 698.769531 731.496094 L 701.726562 731.785156 L 701.726562 732.976562 L 694.328125 733.390625 Z M 694.203125 729.273438 "/><path fill="#8ea570" d="M 704.789062 732.933594 L 704.789062 731.742188 L 707.953125 731.414062 L 708.035156 723.394531 L 708.035156 720.5625 C 708.035156 717.761719 707.996094 715.996094 707.910156 713.980469 L 704.5 713.730469 L 704.5 712.707031 L 711.859375 710.691406 L 712.394531 711.058594 L 712.679688 716.691406 C 713.996094 712.867188 716.753906 710.609375 719.382812 710.609375 C 721.109375 710.609375 722.546875 711.308594 722.917969 712.996094 C 722.875 714.59375 722.136719 715.707031 720.453125 715.707031 C 719.214844 715.707031 718.394531 715.011719 717.410156 713.820312 L 717.082031 713.445312 C 715.105469 714.554688 713.75 716.488281 712.679688 719.65625 L 712.679688 723.394531 L 712.761719 731.335938 L 716.628906 731.742188 L 716.628906 732.933594 Z M 704.789062 732.933594 "/><path fill="#8ea570" d="M 728.113281 727.753906 C 728.113281 726.3125 728.152344 725.328125 728.152344 723.769531 L 728.152344 712.828125 L 724.328125 712.828125 L 724.328125 711.554688 L 728.359375 711.1875 L 729.878906 704.734375 L 732.878906 704.734375 L 732.757812 711.265625 L 738.351562 711.265625 L 738.351562 712.828125 L 732.757812 712.828125 L 732.757812 727.960938 C 732.757812 730.382812 733.785156 731.414062 735.511719 731.414062 C 736.660156 731.414062 737.445312 731.046875 738.554688 730.261719 L 739.167969 730.960938 C 737.976562 732.648438 736.210938 733.589844 733.664062 733.589844 C 729.917969 733.589844 728.113281 731.742188 728.113281 727.753906 "/><path fill="#8ea570" d="M 754.230469 720.722656 C 752.789062 721.097656 751.394531 721.503906 750.367188 721.914062 C 747.199219 723.152344 745.757812 724.960938 745.757812 727.464844 C 745.757812 730.015625 747.199219 731.246094 749.292969 731.246094 C 750.648438 731.246094 751.96875 730.671875 754.230469 728.457031 Z M 754.3125 729.769531 C 752.007812 732.277344 750.28125 733.589844 747.199219 733.589844 C 743.828125 733.589844 741.398438 731.574219 741.398438 728.128906 C 741.398438 724.753906 743.375 722.65625 749.292969 720.96875 C 750.773438 720.519531 752.542969 720.066406 754.230469 719.609375 L 754.230469 717.640625 C 754.230469 713.195312 752.953125 711.964844 749.746094 711.964844 C 748.882812 711.964844 748.019531 712.089844 747.074219 712.378906 L 746.621094 715.339844 C 746.417969 717.3125 745.429688 718.050781 744.238281 718.050781 C 743.085938 718.050781 742.261719 717.476562 742.015625 716.324219 C 742.632812 712.789062 745.882812 710.609375 751.1875 710.609375 C 756.367188 710.609375 758.710938 712.867188 758.710938 718.296875 L 758.710938 728.824219 C 758.710938 731 759.242188 731.664062 760.273438 731.664062 C 760.929688 731.664062 761.382812 731.375 762.121094 730.425781 L 762.777344 731.046875 C 761.835938 732.769531 760.480469 733.550781 758.464844 733.550781 C 756.078125 733.550781 754.765625 732.152344 754.3125 729.769531 "/><path fill="#8ea570" d="M 767.191406 703.292969 C 767.191406 701.726562 768.46875 700.574219 770.03125 700.574219 C 771.550781 700.574219 772.867188 701.726562 772.867188 703.292969 C 772.867188 704.894531 771.550781 706.003906 770.03125 706.003906 C 768.46875 706.003906 767.191406 704.894531 767.191406 703.292969 M 764.726562 732.933594 L 764.726562 731.742188 L 767.890625 731.414062 L 767.972656 723.394531 L 767.972656 720.601562 C 767.972656 717.84375 767.929688 715.914062 767.851562 713.898438 L 764.398438 713.652344 L 764.398438 712.628906 L 772.210938 710.691406 L 772.703125 711.058594 L 772.578125 717.105469 L 772.578125 723.394531 C 772.578125 725.65625 772.621094 729.113281 772.660156 731.453125 L 775.582031 731.742188 L 775.582031 732.933594 Z M 764.726562 732.933594 "/><path fill="#8ea570" d="M 792.773438 732.933594 L 792.773438 731.742188 L 795.898438 731.414062 L 795.980469 723.394531 L 795.980469 718.179688 C 795.980469 714.476562 794.746094 713.15625 792.570312 713.15625 C 791.046875 713.15625 788.867188 713.980469 786.566406 716.242188 L 786.566406 723.394531 L 786.644531 731.453125 L 789.441406 731.742188 L 789.441406 732.933594 L 778.671875 732.933594 L 778.671875 731.742188 L 781.835938 731.414062 L 781.917969 723.394531 L 781.917969 720.5625 C 781.917969 717.804688 781.878906 715.996094 781.792969 713.980469 L 778.382812 713.730469 L 778.382812 712.707031 L 785.742188 710.691406 L 786.277344 711.058594 L 786.523438 714.921875 C 789.277344 711.761719 791.828125 710.609375 794.539062 710.609375 C 798.242188 710.609375 800.585938 712.953125 800.585938 718.417969 L 800.585938 723.394531 L 800.667969 731.453125 L 803.585938 731.742188 L 803.585938 732.933594 Z M 792.773438 732.933594 "/><path fill="#8ea570" d="M 817.21875 702.71875 L 830.578125 702.71875 L 830.578125 703.988281 L 826.304688 704.355469 C 826.261719 708.429688 826.261719 712.628906 826.261719 716.898438 L 826.261719 719.371094 C 826.261719 723.105469 826.261719 727.265625 826.304688 731.457031 L 836.378906 731.457031 L 837.9375 724.464844 L 839.871094 724.464844 L 839.75 732.933594 L 817.21875 732.933594 L 817.257812 731.621094 L 821.285156 731.246094 L 821.328125 719.488281 L 821.328125 716.777344 C 821.328125 712.628906 821.328125 708.429688 821.285156 704.355469 L 817.21875 703.988281 Z M 817.21875 702.71875 "/><path fill="#8ea570" d="M 845.394531 727.753906 C 845.394531 726.3125 845.433594 725.328125 845.433594 723.769531 L 845.433594 712.828125 L 841.609375 712.828125 L 841.609375 711.554688 L 845.640625 711.1875 L 847.164062 704.734375 L 850.160156 704.734375 L 850.042969 711.265625 L 855.632812 711.265625 L 855.632812 712.828125 L 850.042969 712.828125 L 850.042969 727.960938 C 850.042969 730.382812 851.070312 731.414062 852.792969 731.414062 C 853.945312 731.414062 854.726562 731.046875 855.835938 730.261719 L 856.453125 730.960938 C 855.261719 732.648438 853.492188 733.589844 850.945312 733.589844 C 847.203125 733.589844 845.394531 731.742188 845.394531 727.753906 "/><path fill="#8ea570" d="M 874.226562 714.804688 C 872.785156 713.445312 871.425781 712.867188 869.90625 712.867188 C 866.371094 712.867188 863.453125 715.378906 863.453125 722.160156 C 863.453125 728.574219 866.125 731.246094 869.660156 731.246094 C 871.386719 731.246094 872.785156 730.671875 874.226562 729.191406 Z M 874.304688 730.550781 C 872.539062 732.527344 870.320312 733.589844 867.769531 733.589844 C 862.464844 733.589844 858.519531 729.191406 858.519531 722.328125 C 858.519531 715.089844 862.917969 710.613281 868.34375 710.613281 C 870.605469 710.613281 872.578125 711.515625 874.347656 713.609375 L 874.347656 702.261719 L 870.769531 702.054688 L 870.769531 700.949219 L 878.335938 699.511719 L 878.953125 699.878906 L 878.828125 706.253906 L 878.828125 731.496094 L 882.199219 731.742188 L 882.199219 732.933594 L 874.515625 733.390625 Z M 874.304688 730.550781 "/><path fill="#8ea570" d="M 887.148438 730.589844 C 887.148438 728.90625 888.425781 727.589844 890.152344 727.589844 C 891.835938 727.589844 893.152344 728.90625 893.152344 730.589844 C 893.152344 732.191406 891.835938 733.589844 890.152344 733.589844 C 888.425781 733.589844 887.148438 732.191406 887.148438 730.589844 "/></g>`;
+const TABS=[{id:'works',zh:'作品示意',en:'Works'},{id:'types',zh:'窗簾種類',en:'Curtains'},{id:'flow',zh:'服務流程',en:'Process'},{id:'about',zh:'關於・聯絡',en:'Contact'}];
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.querySelectorAll('svg.logo').forEach(s=>s.innerHTML=LOGO);
+const store=$('#store'),panel=$('#panel'),tags=$('#tags'),drapes=$('#drapes');
+let current=null,introTl=null;
+
+/* A/B 標籤 */
+TABS.forEach(t=>tags.insertAdjacentHTML('beforeend',`<button type="button" role="tab" id="tag-${t.id}" data-tab="${t.id}" aria-selected="false"><span class="zh">${t.zh}</span><span class="en">${t.en}</span></button>`));
+/* C 布幅 */
+TABS.forEach(t=>drapes.insertAdjacentHTML('beforeend',`<section class="drape" data-tab="${t.id}"><button type="button" data-tab="${t.id}" aria-label="${t.zh}"><span class="zh">${t.zh}</span><span class="en">${t.en}</span></button><div class="body"></div></section>`));
+
+function mountContent(){
+  const v=document.body.dataset.v;
+  $$('#store .tab, #panel .tab, .drape .body .tab').forEach(el=>{
+    if(v==='c'){drapes.querySelector(`.drape[data-tab="${el.dataset.tab}"] .body`).appendChild(el);el.classList.add('on')}
+    else{panel.appendChild(el);el.classList.remove('on')}
+  });
+}
+
+/* ── A/B：開啟分頁（中間 → 左側／上方） ── */
+function openTag(id){
+  const first=!document.body.classList.contains('open');
+  const btns=$$('#tags button');
+  const state=Flip.getState(btns.concat($$('#tags .zh')));
+  document.body.classList.add('open');
+  btns.forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===id));
+  $$('#panel .tab').forEach(t=>t.classList.toggle('on',t.dataset.tab===id));
+  if(first){
+    Flip.from(state,{duration:reduce?0:.95,ease:'expo.inOut',absolute:true,nested:true});
+    gsap.to('.home-bg',{opacity:0,duration:.8,ease:'power2.out'});
+  }
+  const tab=$(`#panel .tab[data-tab="${id}"]`);
+  panel.scrollTop=0;
+  if(!reduce) gsap.fromTo(tab.children,{opacity:0,y:18,filter:'blur(6px)'},{opacity:1,y:0,filter:'blur(0px)',duration:.9,ease:'expo.out',stagger:.07,delay:first?.45:0,clearProps:'filter'});
+  current=id;
+}
+function closeTags(){
+  if(!document.body.classList.contains('open')) return;
+  const btns=$$('#tags button');
+  const state=Flip.getState(btns.concat($$('#tags .zh')));
+  document.body.classList.remove('open');
+  btns.forEach(b=>b.setAttribute('aria-selected','false'));
+  Flip.from(state,{duration:reduce?0:.85,ease:'expo.inOut',absolute:true,nested:true});
+  gsap.to('.home-bg',{opacity:1,duration:.8});
+  current=null;
+}
+
+/* ── C：拉開布幅 ── */
+const PHOTO=new Image();PHOTO.src='assets/hero-honeycomb.jpg';
+function paintDrapes(){
+  const box=drapes.getBoundingClientRect(),iw=PHOTO.naturalWidth||1477,ih=PHOTO.naturalHeight||1108;
+  const s=Math.max(box.width/iw,box.height/ih),w=iw*s,h=ih*s,ox=(box.width-w)/2,oy=(box.height-h)/2;
+  $$('.drape').forEach(d=>{const r=d.getBoundingClientRect();
+    d.style.backgroundImage=`url(${PHOTO.src})`;d.style.backgroundSize=`${w}px ${h}px`;
+    d.style.backgroundPosition=`${ox-(r.left-box.left)}px ${oy-(r.top-box.top)}px`;});
+}
+PHOTO.onload=paintDrapes;addEventListener('resize',paintDrapes);
+function openDrape(id){
+  const mobile=matchMedia('(max-width:760px)').matches,ds=$$('.drape');
+  drapes.classList.add('opened');
+  ds.forEach(d=>{const on=d.dataset.tab===id;
+    if(!on&&d.classList.contains('on')) gsap.to(d.querySelector('.body'),{opacity:0,duration:.25});
+    d.classList.toggle('on',on);
+    gsap.to(d,{flexGrow:on?1:0,flexBasis:on?'0px':(mobile?'44px':'56px'),duration:reduce?0:1,ease:'expo.inOut',onUpdate:paintDrapes});
+  });
+  const body=$(`.drape[data-tab="${id}"] .body`);body.scrollTop=0;
+  gsap.fromTo(body,{opacity:0},{opacity:1,duration:.6,delay:reduce?0:.55,ease:'power2.out'});
+  if(!reduce) gsap.fromTo(body.querySelector('.tab').children,{opacity:0,y:16},{opacity:1,y:0,duration:.8,ease:'expo.out',stagger:.07,delay:.65});
+  current=id;
+}
+function closeDrapes(){
+  drapes.classList.remove('opened');
+  $$('.drape').forEach(d=>{gsap.to(d.querySelector('.body'),{opacity:0,duration:.25});d.classList.remove('on');
+    gsap.to(d,{flexGrow:1,flexBasis:'0px',duration:reduce?0:1,ease:'expo.inOut',onUpdate:paintDrapes});});
+  current=null;
+}
+
+const isC=()=>document.body.dataset.v==='c';
+function go(id){ isC()?openDrape(id):openTag(id); }
+function home(){ isC()?closeDrapes():closeTags(); }
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-tab]:is(button),[data-go]');
+  if(t){e.preventDefault();go(t.dataset.tab||t.dataset.go);return}
+  if(e.target.closest('#brand')){e.preventDefault();home()}
+});
+$('#tags').addEventListener('keydown',e=>{
+  if(!['ArrowDown','ArrowUp','ArrowLeft','ArrowRight'].includes(e.key))return;
+  const b=$$('#tags button'),i=b.indexOf(document.activeElement);if(i<0)return;
+  const n=b[(i+(e.key==='ArrowDown'||e.key==='ArrowRight'?1:b.length-1))%b.length];n.focus();n.click();e.preventDefault();
+});
+
+/* ── 開場動畫（三版各一種） ── */
+function intro(){
+  const v=document.body.dataset.v,ov=$('#intro'),arcs=$$('#introLogo .arc'),txt=$('#introLogo .word');
+  if(introTl) introTl.kill();
+  gsap.set(ov,{autoAlpha:1});gsap.set('#brand',{autoAlpha:0});gsap.set('.center',{clearProps:'all'});
+  gsap.set('#slogan',{autoAlpha:1,y:0});gsap.set('#slogan span',{clearProps:'clipPath'});
+  const split=SplitText.create('#slogan span',{type:'chars'});
+  const l1=split.chars.filter(c=>c.closest('.l1')),l2=split.chars.filter(c=>c.closest('.l2'));
+  const tl=introTl=gsap.timeline({defaults:{ease:'expo.out'},onComplete:()=>{split.revert();ov.style.pointerEvents='none'}});
+  ov.style.pointerEvents='auto';
+  const items=v==='c'?$$('.drape'):$$('#tags button');
+  gsap.set(items,{autoAlpha:0});gsap.set('.home-line,.drape-foot',{autoAlpha:0});
+  if(v==='c') gsap.set('.drape',{yPercent:-104});
+
+  if(v==='a'){
+    tl.fromTo(arcs,{drawSVG:'50% 50%'},{drawSVG:'0% 100%',duration:1.3,stagger:.08,ease:'power3.inOut'})
+      .fromTo(txt,{autoAlpha:0},{autoAlpha:1,duration:.6},'-=.5')
+      .from(l1,{autoAlpha:0,y:10,duration:.9,stagger:.06},'-=.3')
+      .from(l2,{autoAlpha:0,y:10,duration:.9,stagger:.05},'-=.2');
+  }else if(v==='b'){
+    gsap.set('.sheers i',{xPercent:0});
+    tl.fromTo(arcs,{drawSVG:'0% 0%'},{drawSVG:'0% 100%',duration:1.6,ease:'power2.inOut'})
+      .fromTo(txt,{autoAlpha:0},{autoAlpha:1,duration:.6},'-=.6')
+      .fromTo('#slogan .l1',{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)',duration:1,ease:'power2.inOut'},'-=.4')
+      .fromTo('#slogan .l2',{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)',duration:1.2,ease:'power2.inOut'},'-=.3');
+  }else{
+    tl.to('.drape',{yPercent:0,autoAlpha:1,duration:1.1,stagger:.09,ease:'expo.out'})
+      .fromTo(arcs,{drawSVG:'50% 50%'},{drawSVG:'0% 100%',duration:1.1,stagger:.05,ease:'power3.inOut'},'<.2')
+      .fromTo(txt,{autoAlpha:0},{autoAlpha:1,duration:.5},'-=.4')
+      .from(l1,{autoAlpha:0,y:-12,duration:.7,stagger:.05},'-=.4')
+      .from(l2,{autoAlpha:0,y:-12,duration:.7,stagger:.04},'-=.3');
+  }
+  /* 一道光掃過標語：每個字依序亮成金色再退回 */
+  tl.to(split.chars,{color:'#c4a565',duration:.35,stagger:.035,yoyo:true,repeat:1,ease:'sine.inOut'},'+=.15');
+  tl.add(()=>{},'+=.5');
+  /* logo 飛到左上角 */
+  tl.add(()=>{
+    const brand=$('#brand svg'),il=$('#introLogo'),r1=il.getBoundingClientRect(),r2=brand.getBoundingClientRect();
+    gsap.to(il,{x:r2.left+r2.width/2-(r1.left+r1.width/2),y:r2.top+r2.height/2-(r1.top+r1.height/2),scale:r2.width/r1.width,duration:1,ease:'expo.inOut'});
+  });
+  tl.to('#slogan',{autoAlpha:0,y:-8,duration:.6,ease:'power2.in'},'<');
+  if(v==='b') tl.to('.sheers i:first-child',{xPercent:-101,duration:1.4,ease:'expo.inOut'},'<.2').to('.sheers i:last-child',{xPercent:101,duration:1.4,ease:'expo.inOut'},'<');
+  tl.to(ov,{backgroundColor:'rgba(255,255,255,0)',duration:.8},'<.3')
+    .set('#brand',{autoAlpha:1},'>-0.05').set(ov,{autoAlpha:0})
+    .set('#introLogo',{clearProps:'transform'});
+  tl.to(items,{autoAlpha:1,y:0,duration:.9,stagger:.08,ease:'expo.out'},'-=.2')
+    .to('.home-line,.drape-foot',{autoAlpha:1,duration:.6},'-=.5');
+  if(v!=='c') tl.fromTo(items,{y:14},{y:0,duration:.9,stagger:.08,ease:'expo.out'},'<-0.6');
+  if(reduce) tl.progress(1);
+}
+$('#skip').addEventListener('click',()=>introTl&&introTl.progress(1));
+$('#intro').addEventListener('click',e=>{if(e.target.id!=='skip'&&introTl&&introTl.progress()>.15)introTl.progress(1)});
+
+/* ── 版本切換 ── */
+function setV(v){
+  if(introTl) introTl.progress(1);
+  document.body.classList.remove('open');closeDrapes();
+  $$('#tags button').forEach(b=>{b.setAttribute('aria-selected','false');gsap.set(b,{clearProps:'all'})});
+  gsap.set('.home-bg',{opacity:1});gsap.set('#intro',{backgroundColor:''});
+  document.body.dataset.v=v;
+  $$('.vswitch [data-v]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v));
+  mountContent();paintDrapes();
+  try{history.replaceState(null,'','#'+v)}catch(e){}
+  intro();
+}
+$$('.vswitch [data-v]').forEach(b=>b.addEventListener('click',()=>setV(b.dataset.v)));
+$('#replay').addEventListener('click',()=>setV(document.body.dataset.v));
+addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(['a','b','c'].includes(h)&&h!==document.body.dataset.v)setV(h)});
+const start=(location.hash||'').replace('#','');
+setV(['a','b','c'].includes(start)?start:'a');
+</script>
