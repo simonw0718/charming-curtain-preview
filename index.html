@@ -392,6 +392,7 @@ function intro(){
   const v=document.body.dataset.v,ov=$('#intro'),arcs=$$('#introLogo .arc'),txt=$('#introLogo .word');
   if(introTl) introTl.kill();
   gsap.set(ov,{autoAlpha:1});gsap.set('#brand',{autoAlpha:0});gsap.set('.center',{clearProps:'all'});
+  gsap.killTweensOf('#introLogo, #introLogo .arc');gsap.set('#introLogo',{clearProps:'transform'});gsap.set(arcs,{clearProps:'transform'});
   gsap.set('#slogan',{autoAlpha:1,y:0});gsap.set('#slogan span',{clearProps:'clipPath'});
   const split=SplitText.create('#slogan span',{type:'chars'});
   const l1=split.chars.filter(c=>c.closest('.l1')),l2=split.chars.filter(c=>c.closest('.l2'));
@@ -413,20 +414,25 @@ function intro(){
       .fromTo('#slogan .l1',{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)',duration:1,ease:'power2.inOut'},'-=.4')
       .fromTo('#slogan .l2',{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)',duration:1.2,ease:'power2.inOut'},'-=.3');
   }else{
+    /* 徽章：每一圈像窗簾掛環，從短短一段沿著自己的圓軌道轉進定位（左組順時針、右組逆時針，外圈先到） */
+    const ring=a=>{const b=a.getBBox();return b.x+b.width/2<560?{o:'366 486',r:-160}:{o:'769 697',r:160}};
+    const order=[...arcs].sort((a,b)=>b.getBBox().width-a.getBBox().width);
     tl.to('.drape',{yPercent:0,autoAlpha:1,duration:1.1,stagger:.09,ease:'expo.out'})
-      .fromTo(arcs,{drawSVG:'50% 50%'},{drawSVG:'0% 100%',duration:1.1,stagger:.05,ease:'power3.inOut'},'<.2')
-      .fromTo(txt,{autoAlpha:0},{autoAlpha:1,duration:.5},'-=.4')
-      .from(l1,{autoAlpha:0,y:-12,duration:.7,stagger:.05},'-=.4')
-      .from(l2,{autoAlpha:0,y:-12,duration:.7,stagger:.04},'-=.3');
+      .fromTo(order,{drawSVG:'0% 12%',rotation:i=>ring(order[i]).r,svgOrigin:i=>ring(order[i]).o,autoAlpha:0},
+        {drawSVG:'0% 100%',rotation:0,autoAlpha:1,duration:1.6,stagger:.07,ease:'power4.out'},'<.3')
+      .fromTo(txt,{autoAlpha:0},{autoAlpha:1,duration:.5},'-=.6')
+      /* 標語：每個字像百葉簾的葉片，由上往下翻開 */
+      .from(l1,{rotationX:-92,autoAlpha:0,transformOrigin:'50% 0%',transformPerspective:500,duration:.8,stagger:.06,ease:'back.out(1.6)'},'-=.5')
+      .from(l2,{rotationX:-92,autoAlpha:0,transformOrigin:'50% 0%',transformPerspective:500,duration:.8,stagger:.05,ease:'back.out(1.6)'},'-=.45');
   }
   /* 一道光掃過標語：每個字依序亮成金色再退回 */
   tl.to(split.chars,{color:'#c4a565',duration:.35,stagger:.035,yoyo:true,repeat:1,ease:'sine.inOut'},'+=.15');
   tl.add(()=>{},'+=.5');
   /* logo 飛到左上角 */
-  tl.add(()=>{
-    const brand=$('#brand svg'),il=$('#introLogo'),r1=il.getBoundingClientRect(),r2=brand.getBoundingClientRect();
-    gsap.to(il,{x:r2.left+r2.width/2-(r1.left+r1.width/2),y:r2.top+r2.height/2-(r1.top+r1.height/2),scale:r2.width/r1.width,duration:1,ease:'expo.inOut'});
-  });
+  let fly;
+  const flyTo=()=>{const r1=$('#introLogo').getBoundingClientRect(),r2=$('#brand svg').getBoundingClientRect();
+    return {x:r2.left+r2.width/2-(r1.left+r1.width/2),y:r2.top+r2.height/2-(r1.top+r1.height/2),s:r2.width/r1.width}};
+  tl.to('#introLogo',{x:()=>(fly=flyTo()).x,y:()=>fly.y,scale:()=>fly.s,duration:1,ease:'expo.inOut'});
   tl.to('#slogan',{autoAlpha:0,y:-8,duration:.6,ease:'power2.in'},'<');
   if(v==='b') tl.to('.sheers i:first-child',{xPercent:-101,duration:1.4,ease:'expo.inOut'},'<.2').to('.sheers i:last-child',{xPercent:101,duration:1.4,ease:'expo.inOut'},'<');
   tl.to(ov,{backgroundColor:'rgba(255,255,255,0)',duration:.8},'<.3')
