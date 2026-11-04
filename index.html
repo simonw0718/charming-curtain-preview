@@ -54,7 +54,7 @@ img{max-width:100%;display:block}
 
 /* ── 首頁背景照 ── */
 .home-bg{position:fixed;inset:0;z-index:0}
-.home-bg img{width:100%;height:100%;object-fit:cover}
+.home-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 45%}
 .home-bg::after{content:"";position:absolute;inset:0;background:var(--veil)}
 .sway{position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,0) 0 40px,rgba(255,255,255,.5) 70px,rgba(255,255,255,0) 110px);background-size:220px 100%;animation:sway 14s ease-in-out infinite alternate;z-index:1}
 @keyframes sway{to{background-position:220px 0}}
@@ -101,17 +101,18 @@ body.open .home-line{opacity:0 !important;visibility:hidden !important}
 .tab h2{font-weight:300}
 .lede{color:var(--mute);font-size:15px;max-width:34em}
 .shots{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
-.shots figure{margin:0;display:flex;flex-direction:column;gap:8px;min-width:0}
-.shots figure:nth-child(1){grid-column:span 4}
-.shots figure:nth-child(2){grid-column:span 2}
-.shots figure:nth-child(n+3){grid-column:span 3}
-.shots img,.ph{width:100%;aspect-ratio:4/3;object-fit:cover}
-.shots figure:nth-child(2) .ph{aspect-ratio:auto;flex:1}
+.shots figure{margin:0;display:flex;flex-direction:column;gap:8px;min-width:0;grid-column:span 3}
+.shots .wide{grid-column:span 4}
+.shots .tall{grid-column:span 2}
+.shots img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.shots .tall img{aspect-ratio:2/3}  /* 4 欄寬圖 4:3 的高度 ≈ 2 欄寬 2:3 */
 figcaption{font-size:12px;letter-spacing:.1em;color:var(--mute)}
 .ph{display:grid;place-items:center;text-align:center;border:1px dashed var(--rose);background:#fdf6f7;color:var(--rose-ink);font-size:12px;letter-spacing:.08em;padding:12px;line-height:1.7}
 .types{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:40px}
-.types li{display:grid;grid-template-columns:7.5em 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--hair);align-items:baseline}
+.types li{display:grid;grid-template-columns:64px 6em 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--hair);align-items:baseline}
 .types b{font-family:var(--head);font-weight:400;font-size:17px;letter-spacing:.12em}
+.types img,.types .ph{width:64px;height:64px;object-fit:cover;border-radius:4px;align-self:center}
+.types .ph{padding:0;font-size:11px;font-style:normal}
 .types span{font-size:14px;color:var(--mute);line-height:1.7}
 .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;position:relative}
 .steps::before{content:"";position:absolute;left:0;right:0;top:9px;height:1px;background:var(--hair)}
@@ -133,9 +134,10 @@ figcaption{font-size:12px;letter-spacing:.1em;color:var(--mute)}
 .cta:hover{background:#6f8955}
 @media (max-width:760px){
   .shots{grid-template-columns:1fr 1fr}
-  .shots figure:nth-child(n){grid-column:span 2}
-  .shots figure:nth-child(n+3){grid-column:span 1}
-  .shots figure:nth-child(2) .ph{aspect-ratio:4/3}
+  .shots figure{grid-column:span 1}
+  .shots .wide{grid-column:span 2}
+  .shots .tall{grid-column:span 1}
+  .shots .tall img{aspect-ratio:4/3}
   .types{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr;gap:0}
   .steps::before{left:5px;right:auto;top:0;bottom:0;width:1px;height:auto}
@@ -150,6 +152,13 @@ figcaption{font-size:12px;letter-spacing:.1em;color:var(--mute)}
 .home-line a:hover{border-color:var(--sage)}
 
 
+/* ── 電腦版 LINE：跳出 QR Code（line.me/R 連結只能在手機開） ── */
+#lineDlg{border:1px solid var(--hair);border-radius:18px;padding:32px 36px 26px;background:#fff;color:var(--ink);text-align:center;max-width:min(320px,calc(100vw - 32px))}
+#lineDlg::backdrop{background:rgba(62,67,56,.35)}
+#lineDlg img{width:180px;height:180px;margin:0 auto 14px}
+#lineDlg p{font-size:14px;letter-spacing:.1em;line-height:1.9}
+#lineDlg b{font-weight:500;color:var(--sage);letter-spacing:.06em}
+#lineDlg button{margin-top:16px;font-size:13px;letter-spacing:.2em;color:var(--mute);border-bottom:1px solid var(--hair)}
 @media (prefers-reduced-motion:reduce){.sway{animation:none}}
 </style>
 
@@ -165,7 +174,7 @@ figcaption{font-size:12px;letter-spacing:.1em;color:var(--mute)}
 </div>
 
 <div id="tagmode">
-  <div class="home-bg"><img src="assets/hero-honeycomb.jpg" alt=""><div class="sway"></div><span class="bg-note">蜂巢簾｜實拍</span></div>
+  <div class="home-bg"><img src="assets/photos/sfold-light.jpg" alt=""><div class="sway"></div><span class="bg-note">蛇型簾｜實拍</span></div>
   <nav id="tags" role="tablist" aria-label="分類"></nav>
   <main id="panel"></main>
   <p class="home-line"><span>高雄橋頭</span><a href="tel:0919773142">0919-773-142</a><a href="https://line.me/R/ti/p/@776upcvd" target="_blank" rel="noopener">LINE 預約丈量</a></p>
@@ -176,24 +185,28 @@ figcaption{font-size:12px;letter-spacing:.1em;color:var(--mute)}
   <article class="tab" data-tab="works">
     <h2>光，落在布上的樣子</h2>
     <div class="shots">
-      <figure><img src="assets/hero-honeycomb.jpg" alt="灰白色蜂巢簾近拍，側光打在摺面上"><figcaption>蜂巢簾｜實拍</figcaption></figure>
-      <figure><div class="ph">落地紗簾＋遮光簾<br>情境示意｜待放原檔</div><figcaption>情境示意</figcaption></figure>
-      <figure><div class="ph">斑馬簾<br>情境示意｜待放原檔</div><figcaption>情境示意</figcaption></figure>
-      <figure><div class="ph">咖啡色蜂巢簾<br>情境示意｜待放原檔</div><figcaption>情境示意</figcaption></figure>
+      <figure class="wide"><img src="assets/photos/honeycomb-bath.jpg" alt="浴室窗上的上下開蜂巢簾，陽光斜照在牆面與地板" loading="lazy"><figcaption>蜂巢簾（上下開）｜實拍</figcaption></figure>
+      <figure class="tall"><img src="assets/photos/sheer-marble.jpg" alt="落地白紗搭配深灰遮光簾，大理石地面" loading="lazy"><figcaption>紗簾＋遮光簾｜實拍</figcaption></figure>
+      <figure><img src="assets/photos/sheer-light.jpg" alt="白紗斜角近拍，光線穿過摺浪" loading="lazy"><figcaption>紗簾｜實拍</figcaption></figure>
+      <figure><img src="assets/photos/room-front.jpg" alt="空房正面：百葉與灰色布簾，通往陽台" loading="lazy"><figcaption>百葉＋布簾｜實拍</figcaption></figure>
+      <figure><img src="assets/photos/sheer-closed.jpg" alt="落地白紗拉上" loading="lazy"><figcaption>紗簾 拉上｜實拍</figcaption></figure>
+      <figure><img src="assets/photos/sheer-open.jpg" alt="同一扇窗白紗拉開" loading="lazy"><figcaption>紗簾 拉開｜實拍</figcaption></figure>
+      <figure><img src="assets/photos/zebra-front.jpg" alt="臥室窗戶的調光簾" loading="lazy"><figcaption>調光簾｜實拍</figcaption></figure>
+      <figure><img src="assets/photos/roller-staged.jpg" alt="捲簾小房間，加上書桌椅的佈置示意" loading="lazy"><figcaption>捲簾｜情境示意（AI 佈置）</figcaption></figure>
     </div>
-    <p class="lede">圖片為情境示意。布料的顏色與透光，丈量時帶樣本到府，在你家的光線下看。</p>
+    <p class="lede">完工實拍。布料的顏色與透光，丈量時帶樣本到府，在你家的光線下看。</p>
   </article>
   <article class="tab" data-tab="types">
     <h2>從你的窗開始選</h2>
     <ul class="types">
-      <li><b>蛇型簾</b><span>S 形摺浪，俐落，落地窗首選</span></li>
-      <li><b>打摺布簾</b><span>垂墜厚實，空間更溫暖</span></li>
-      <li><b>紗簾</b><span>留住天光，擋住視線</span></li>
-      <li><b>調光簾</b><span>兩層條紋錯開，隨手調亮暗</span></li>
-      <li><b>蜂巢簾</b><span>蜂巢結構隔熱，西曬房適用</span></li>
-      <li><b>捲簾</b><span>收起幾乎隱形，好清潔</span></li>
-      <li><b>羅馬簾</b><span>層層上收，布的質感、省空間</span></li>
-      <li><b>百葉</b><span>木或鋁，葉片調角度</span></li>
+      <li><img src="assets/photos/sfold-light.jpg" alt="" loading="lazy"><b>蛇型簾</b><span>S 形摺浪，俐落，落地窗首選</span></li>
+      <li><img src="assets/photos/drape-texture.jpg" alt="" loading="lazy"><b>打摺布簾</b><span>垂墜厚實，空間更溫暖</span></li>
+      <li><img src="assets/photos/sheer-light.jpg" alt="" loading="lazy"><b>紗簾</b><span>留住天光，擋住視線</span></li>
+      <li><img src="assets/photos/zebra-front.jpg" alt="" loading="lazy"><b>調光簾</b><span>兩層條紋錯開，隨手調亮暗</span></li>
+      <li><img src="assets/photos/../hero-honeycomb.jpg" alt="" loading="lazy"><b>蜂巢簾</b><span>蜂巢結構隔熱，西曬房適用</span></li>
+      <li><img src="assets/photos/roller.jpg" alt="" loading="lazy"><b>捲簾</b><span>收起幾乎隱形，好清潔</span></li>
+      <li><i class="ph">待補</i><b>羅馬簾</b><span>層層上收，布的質感、省空間</span></li>
+      <li><img src="assets/photos/room-blinds.jpg" alt="" loading="lazy"><b>百葉</b><span>木或鋁，葉片調角度</span></li>
     </ul>
   </article>
   <article class="tab" data-tab="flow">
@@ -224,6 +237,12 @@ figcaption{font-size:12px;letter-spacing:.1em;color:var(--mute)}
     </div>
   </article>
 </div>
+
+<dialog id="lineDlg" aria-labelledby="lineDlgT">
+  <img src="assets/line-qr.svg" alt="LINE 官方帳號 QR Code">
+  <p id="lineDlgT">用手機 LINE 掃描加好友<br><b>@776upcvd</b></p>
+  <button type="button" autofocus>關閉</button>
+</dialog>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
@@ -282,7 +301,13 @@ function closeTags(){
   gsap.to('.home-bg',{opacity:1,duration:.8});
 }
 
+/* 電腦沒有 LINE App：點 LINE 連結改跳 QR Code；手機照常開 LINE */
+const lineDlg=$('#lineDlg');
+lineDlg.querySelector('button').addEventListener('click',()=>lineDlg.close());
+lineDlg.addEventListener('click',e=>{if(e.target===lineDlg)lineDlg.close()});
 document.addEventListener('click',e=>{
+  const ln=e.target.closest('a[href*="line.me/"]');
+  if(ln&&!matchMedia('(pointer:coarse)').matches){e.preventDefault();lineDlg.showModal();return}
   const t=e.target.closest('[data-tab]:is(button),[data-go]');
   if(t){e.preventDefault();openTag(t.dataset.tab||t.dataset.go);return}
   if(e.target.closest('#brand')){e.preventDefault();closeTags()}
