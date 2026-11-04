@@ -55,10 +55,7 @@ img{max-width:100%;display:block}
 /* ── 首頁背景照 ── */
 .home-bg{position:fixed;inset:0;z-index:0}
 .home-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 45%}
-.home-bg::after{content:"";position:absolute;inset:0;background:var(--veil)}
-.sway{position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,0) 0 40px,rgba(255,255,255,.5) 70px,rgba(255,255,255,0) 110px);background-size:220px 100%;animation:sway 14s ease-in-out infinite alternate;z-index:1}
-@keyframes sway{to{background-position:220px 0}}
-.bg-note{position:absolute;right:var(--gutter-r);bottom:calc(96px + env(safe-area-inset-bottom,0px));z-index:2;font-size:11px;letter-spacing:.14em;color:var(--mute)}
+.home-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(246,247,242,.7),rgba(246,247,242,0) 16%,rgba(246,247,242,0) 80%,rgba(246,247,242,.8)),rgba(246,247,242,.3)}
 
 /* ── 標籤 ── */
 #tags{position:fixed;z-index:20;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(14px,3vh,26px);pointer-events:none}
@@ -159,7 +156,6 @@ figcaption{font-size:12px;letter-spacing:.1em;color:var(--mute)}
 #lineDlg p{font-size:14px;letter-spacing:.1em;line-height:1.9}
 #lineDlg b{font-weight:500;color:var(--sage);letter-spacing:.06em}
 #lineDlg button{margin-top:16px;font-size:13px;letter-spacing:.2em;color:var(--mute);border-bottom:1px solid var(--hair)}
-@media (prefers-reduced-motion:reduce){.sway{animation:none}}
 </style>
 
 <header><a class="brand" href="#home" id="brand" aria-label="回到首頁"><svg class="logo" viewBox="110 240 990 790" aria-hidden="true"></svg><span>晟銘窗簾<small>Charming Curtain</small></span></a></header>
@@ -174,7 +170,7 @@ figcaption{font-size:12px;letter-spacing:.1em;color:var(--mute)}
 </div>
 
 <div id="tagmode">
-  <div class="home-bg"><img src="assets/photos/sfold-light.jpg" alt=""><div class="sway"></div><span class="bg-note">蛇型簾｜實拍</span></div>
+  <div class="home-bg"><img src="assets/photos/sheer-marble.jpg" alt=""></div>
   <nav id="tags" role="tablist" aria-label="分類"></nav>
   <main id="panel"></main>
   <p class="home-line"><span>高雄橋頭</span><a href="tel:0919773142">0919-773-142</a><a href="https://line.me/R/ti/p/@776upcvd" target="_blank" rel="noopener">LINE 預約丈量</a></p>
@@ -185,21 +181,21 @@ figcaption{font-size:12px;letter-spacing:.1em;color:var(--mute)}
   <article class="tab" data-tab="works">
     <h2>光，落在布上的樣子</h2>
     <div class="shots">
-      <figure class="wide"><img src="assets/photos/honeycomb-bath.jpg" alt="浴室窗上的上下開蜂巢簾，陽光斜照在牆面與地板" loading="lazy"><figcaption>蜂巢簾（上下開）｜實拍</figcaption></figure>
-      <figure class="tall"><img src="assets/photos/sheer-marble.jpg" alt="落地白紗搭配深灰遮光簾，大理石地面" loading="lazy"><figcaption>紗簾＋遮光簾｜實拍</figcaption></figure>
-      <figure><img src="assets/photos/sheer-light.jpg" alt="白紗斜角近拍，光線穿過摺浪" loading="lazy"><figcaption>紗簾｜實拍</figcaption></figure>
-      <figure><img src="assets/photos/room-front.jpg" alt="空房正面：百葉與灰色布簾，通往陽台" loading="lazy"><figcaption>百葉＋布簾｜實拍</figcaption></figure>
-      <figure><img src="assets/photos/sheer-closed.jpg" alt="落地白紗拉上" loading="lazy"><figcaption>紗簾 拉上｜實拍</figcaption></figure>
-      <figure><img src="assets/photos/sheer-open.jpg" alt="同一扇窗白紗拉開" loading="lazy"><figcaption>紗簾 拉開｜實拍</figcaption></figure>
-      <figure><img src="assets/photos/zebra-front.jpg" alt="臥室窗戶的調光簾" loading="lazy"><figcaption>調光簾｜實拍</figcaption></figure>
-      <figure><img src="assets/photos/roller-staged.jpg" alt="捲簾小房間，加上書桌椅的佈置示意" loading="lazy"><figcaption>捲簾｜情境示意（AI 佈置）</figcaption></figure>
+      <figure class="wide"><img src="assets/photos/honeycomb-bath.jpg" alt="浴室窗上的上下開蜂巢簾，陽光斜照在牆面與地板" loading="lazy"></figure>
+      <figure class="tall"><img src="assets/photos/sheer-marble.jpg" alt="落地白紗搭配深灰遮光簾，大理石地面" loading="lazy"></figure>
+      <figure><img src="assets/photos/sheer-light.jpg" alt="白紗斜角近拍，光線穿過摺浪" loading="lazy"></figure>
+      <figure><img src="assets/photos/room-front.jpg" alt="空房正面：百葉與灰色布簾，通往陽台" loading="lazy"></figure>
+      <figure><img src="assets/photos/sheer-closed.jpg" alt="落地白紗拉上" loading="lazy"></figure>
+      <figure><img src="assets/photos/sheer-open.jpg" alt="同一扇窗白紗拉開" loading="lazy"></figure>
+      <figure><img src="assets/photos/zebra-front.jpg" alt="臥室窗戶的調光簾" loading="lazy"></figure>
+      <figure><img src="assets/photos/roller-staged.jpg" alt="捲簾小房間，加上書桌椅的佈置示意" loading="lazy"><figcaption>情境示意（AI 佈置）</figcaption></figure>
     </div>
     <p class="lede">完工實拍。布料的顏色與透光，丈量時帶樣本到府，在你家的光線下看。</p>
   </article>
   <article class="tab" data-tab="types">
     <h2>從你的窗開始選</h2>
     <ul class="types">
-      <li><img src="assets/photos/sfold-light.jpg" alt="" loading="lazy"><b>蛇型簾</b><span>S 形摺浪，俐落，落地窗首選</span></li>
+      <li><i class="ph">待補</i><b>蛇型簾</b><span>S 形摺浪，俐落，落地窗首選</span></li>
       <li><img src="assets/photos/drape-texture.jpg" alt="" loading="lazy"><b>打摺布簾</b><span>垂墜厚實，空間更溫暖</span></li>
       <li><img src="assets/photos/sheer-light.jpg" alt="" loading="lazy"><b>紗簾</b><span>留住天光，擋住視線</span></li>
       <li><img src="assets/photos/zebra-front.jpg" alt="" loading="lazy"><b>調光簾</b><span>兩層條紋錯開，隨手調亮暗</span></li>
@@ -215,9 +211,9 @@ figcaption{font-size:12px;letter-spacing:.1em;color:var(--mute)}
       <li><b>LINE 預約</b><span>傳窗戶照片</span></li>
       <li><b>到府丈量</b><span>帶樣本上門</span></li>
       <li><b>挑選布料</b><span>在你家光線下比</span></li>
-      <li><b>報價</b><span>訂金 <span class="blank">__%</span></span></li>
-      <li><b>製作</b><span>約 <span class="blank">__ 天</span></span></li>
-      <li><b>安裝</b><span>保固 <span class="blank">__ 年</span></span></li>
+      <li><b>報價</b><span>依尺寸與布料，現場說明</span></li>
+      <li><b>製作</b><span>量身訂做</span></li>
+      <li><b>安裝</b><span>到府安裝、調整到順手</span></li>
     </ol>
   </article>
   <article class="tab" data-tab="about">
@@ -229,6 +225,7 @@ figcaption{font-size:12px;letter-spacing:.1em;color:var(--mute)}
         <dl class="rows">
           <dt>LINE</dt><dd><a href="https://line.me/R/ti/p/@776upcvd" target="_blank" rel="noopener">@776upcvd</a>（官方帳號）</dd>
           <dt>電話</dt><dd><a href="tel:0919773142">0919-773-142</a></dd>
+          <dt>Email</dt><dd><a href="mailto:P8316218@yahoo.com.tw">P8316218@yahoo.com.tw</a></dd>
           <dt>地址</dt><dd>高雄市橋頭區新南三街32號　<a href="https://www.google.com/maps/search/?api=1&query=%E9%AB%98%E9%9B%84%E5%B8%82%E6%A9%8B%E9%A0%AD%E5%8D%80%E6%96%B0%E5%8D%97%E4%B8%89%E8%A1%9732%E8%99%9F" target="_blank" rel="noopener">地圖</a></dd>
           <dt>範圍</dt><dd>高雄及周邊</dd>
         </dl>
