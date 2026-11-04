@@ -81,6 +81,9 @@ body.open #tags .en{display:none}
 #panel{position:fixed;z-index:10;inset:0;overflow-y:auto;padding:calc(var(--top) + 128px) var(--gutter-r) 120px calc(var(--gutter-l) + 260px);visibility:hidden;scrollbar-width:thin;scrollbar-color:var(--hair) transparent}
 body.open #panel{visibility:visible}
 body.open .home-line{opacity:0 !important;visibility:hidden !important}
+.home-slogan{font-family:var(--head);font-weight:300;font-size:clamp(17px,2.2vw,22px);letter-spacing:.32em;line-height:2;color:var(--ink);text-align:left;margin:0 0 clamp(10px,3vh,28px);text-shadow:0 0 18px rgba(246,247,242,.95),0 0 4px rgba(246,247,242,.9)}
+.home-slogan span{display:block}.home-slogan span+span{padding-left:2em}
+body.open .home-slogan{display:none}
 
 /* 手機：退到上方 */
 @media (max-width:760px){
@@ -172,7 +175,7 @@ figcaption{font-size:12px;letter-spacing:.1em;color:var(--mute)}
 
 <div id="tagmode">
   <div class="home-bg"><img src="assets/photos/sheer-marble.jpg" alt=""></div>
-  <nav id="tags" role="tablist" aria-label="分類"></nav>
+  <nav id="tags" role="tablist" aria-label="分類"><p class="home-slogan" role="presentation"><span>讓每一道光線，</span><span>都成為家裡最美的風景</span></p></nav>
   <main id="panel"></main>
   <p class="home-line"><span>高雄橋頭</span><a href="tel:0919773142">0919-773-142</a><a href="https://line.me/R/ti/p/@776upcvd" target="_blank" rel="noopener">LINE 預約丈量</a></p>
 </div>
@@ -322,7 +325,7 @@ function intro(){
   const ov=$('#intro'),arcs=$$('#introLogo .arc'),txt=$('#introLogo .word'),items=$$('#tags button');
   const split=SplitText.create('#slogan span',{type:'chars'});
   const tl=introTl=gsap.timeline({defaults:{ease:'expo.out'},onComplete:()=>{split.revert();ov.style.pointerEvents='none'}});
-  gsap.set(items,{autoAlpha:0});gsap.set('.home-line',{autoAlpha:0});gsap.set('.sheers i',{xPercent:0});
+  gsap.set(items,{autoAlpha:0});gsap.set('.home-slogan',{autoAlpha:0});gsap.set('.home-line',{autoAlpha:0});gsap.set('.sheers i',{xPercent:0});
 
   tl.fromTo(arcs,{drawSVG:'0% 0%'},{drawSVG:'0% 100%',duration:1.6,ease:'power2.inOut'})
     .fromTo(txt,{autoAlpha:0},{autoAlpha:1,duration:.6},'-=.6')
@@ -342,7 +345,8 @@ function intro(){
     .to(ov,{backgroundColor:'rgba(246,247,242,0)',duration:.8},'<.3')
     .set('#brand',{autoAlpha:1},'>-0.05').set(ov,{autoAlpha:0})
     .set('#introLogo',{clearProps:'transform'});
-  tl.fromTo(items,{autoAlpha:0,y:14},{autoAlpha:1,y:0,duration:.9,stagger:.08,ease:'expo.out'},'-=.2')
+  tl.fromTo('.home-slogan',{autoAlpha:0},{autoAlpha:1,duration:.9},'-=.2')
+    .fromTo(items,{autoAlpha:0,y:14},{autoAlpha:1,y:0,duration:.9,stagger:.08,ease:'expo.out'},'-=.2')
     .to('.home-line',{autoAlpha:1,duration:.6},'-=.5');
   if(reduce) tl.progress(1);
 }
