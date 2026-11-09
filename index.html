@@ -80,6 +80,8 @@ body.open #tags .en{display:none}
 
 #panel{position:fixed;z-index:10;inset:0;overflow-y:auto;padding:calc(var(--top) + 128px) var(--gutter-r) 120px calc(var(--gutter-l) + 260px);visibility:hidden;scrollbar-width:thin;scrollbar-color:var(--hair) transparent}
 body.open #panel{visibility:visible}
+/* 內容往上捲時不從 logo 後面透出：展開時 header 變成一條底色遮罩（在內容之上、logo 與標籤之下） */
+body.open header{position:fixed;left:0;right:0;top:0;height:calc(var(--top) + 108px);z-index:12;pointer-events:none;background:linear-gradient(var(--paper) 82%,rgba(246,247,242,0))}
 body.open .home-line{opacity:0 !important;visibility:hidden !important}
 .home-slogan{font-family:var(--head);font-weight:300;font-size:clamp(17px,2.2vw,22px);letter-spacing:.32em;line-height:2;color:var(--ink);text-align:left;margin:0 0 clamp(10px,3vh,28px);text-shadow:0 0 18px rgba(246,247,242,.95),0 0 4px rgba(246,247,242,.9)}
 .home-slogan span{display:block}.home-slogan span+span{padding-left:2em}
@@ -89,6 +91,7 @@ body.open .home-slogan{display:none}
 @media (max-width:760px){
   body.open #tags{top:calc(var(--top) + 72px);left:0;right:0;width:auto;flex-direction:row;gap:6px;overflow-x:auto;padding:6px var(--gutter-r) 10px var(--gutter-l);background:var(--paper);border-bottom:1px solid var(--hair);scrollbar-width:none}
   body.open #tags::-webkit-scrollbar{display:none}
+  body.open header{height:calc(var(--top) + 76px);background:var(--paper)}
   body.open #tags .en{display:none}
   body.open #tags .zh{font-size:15px;letter-spacing:.14em}
   #panel{padding:calc(var(--top) + 140px) var(--gutter-r) 120px var(--gutter-l)}
