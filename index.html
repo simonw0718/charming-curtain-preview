@@ -154,6 +154,31 @@ figcaption{font-size:12px;letter-spacing:.1em;color:var(--mute)}
   .about .ph{aspect-ratio:4/3;max-width:260px}
 }
 
+/* ── 留電話回電表單 ── */
+.ask{scroll-margin-top:calc(var(--top) + 120px);margin-top:24px;padding-top:36px;border-top:1px solid var(--hair);display:flex;flex-direction:column;gap:22px;max-width:640px}
+.ask h3{font-family:var(--head);font-weight:300;font-size:clamp(19px,2.4vw,22px);letter-spacing:.12em;line-height:1.6;text-wrap:balance}
+.ask-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.f{display:flex;flex-direction:column;gap:6px;font-size:13px;letter-spacing:.14em;color:var(--mute)}
+.f input,.f textarea{font:inherit;font-size:16px;letter-spacing:.04em;color:var(--ink);background:#fff;border:1px solid var(--hair);border-radius:10px;padding:10px 14px;width:100%;resize:vertical;transition:border-color .25s}
+.f input::placeholder,.f textarea::placeholder{color:#a3a896}
+.f input:focus,.f textarea:focus{outline:none;border-color:var(--sage)}
+.f input[aria-invalid="true"]{border-color:var(--rose-ink)}
+.chips{border:0;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.chips legend{padding:0;margin-bottom:8px;font-size:13px;letter-spacing:.14em;color:var(--mute)}
+.chips small{font-size:12px;letter-spacing:.04em}
+.chips label{position:relative;display:inline-flex;align-items:center;padding:7px 16px;border:1px solid var(--hair);border-radius:99px;background:rgba(255,255,255,.7);font-size:14px;letter-spacing:.1em;cursor:pointer;transition:border-color .25s,background .25s,color .25s}
+.chips input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chips label:has(input:checked){border-color:var(--sage);background:var(--sage);color:#fff}
+.chips label:has(input:focus-visible){outline:1.5px solid var(--gold);outline-offset:3px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.ask-note{font-size:12px;letter-spacing:.06em;color:var(--mute);margin-bottom:-8px}
+.ask .cta{border:1px solid var(--sage);cursor:pointer}
+.ask .cta[disabled]{opacity:.6;cursor:wait}
+.ask-msg{font-size:14px;line-height:1.8;min-height:1em}
+.ask-msg.ok{padding:14px 18px;border-left:2px solid var(--sage);background:rgba(255,255,255,.7)}
+.ask-msg.err{color:var(--rose-ink)}
+@media (max-width:760px){.ask-grid{grid-template-columns:1fr}.ask{scroll-margin-top:calc(var(--top) + 150px)}}
+
 /* ── 首頁底部聯絡 ── */
 .home-line{position:fixed;z-index:15;left:0;right:0;bottom:0;display:flex;justify-content:center;flex-wrap:wrap;gap:6px 22px;padding:16px var(--gutter-r) calc(18px + env(safe-area-inset-bottom,0px)) var(--gutter-l);font-size:13px;letter-spacing:.16em;color:var(--ink);transition:opacity .5s}
 .home-line a{text-decoration:none;border-bottom:1px solid var(--hair)}
@@ -228,7 +253,7 @@ figcaption{font-size:12px;letter-spacing:.1em;color:var(--mute)}
       <li><b>製作</b><span>量身訂做</span></li>
       <li><b>安裝</b><span>到府安裝、調整到順手</span></li>
     </ol>
-    <p class="flow-alt"><b>也可以線上詢價</b>先自己量好窗戶尺寸，用 <a href="https://line.me/R/ti/p/@776upcvd" target="_blank" rel="noopener">LINE</a> 傳尺寸和照片，就能先問價格。</p>
+    <p class="flow-alt"><b>也可以線上詢價</b>先自己量好窗戶尺寸，用 <a href="https://line.me/R/ti/p/@776upcvd" target="_blank" rel="noopener">LINE</a> 傳尺寸和照片，就能先問價格。不方便傳 LINE，也可以<a href="#ask" data-go="about" data-focus="ask">留下電話等我們回電</a>。</p>
   </article>
   <article class="tab" data-tab="about">
     <div class="about">
@@ -247,6 +272,25 @@ figcaption{font-size:12px;letter-spacing:.1em;color:var(--mute)}
         <a class="cta" href="https://line.me/R/ti/p/@776upcvd" target="_blank" rel="noopener">LINE 預約到府丈量</a>
       </div>
     </div>
+    <form id="ask" class="ask" novalidate>
+      <h3>不方便傳 LINE？留下電話，我們回電</h3>
+      <div class="ask-grid">
+        <label class="f">稱呼<input name="name" autocomplete="name" maxlength="20" placeholder="例：王小姐" required></label>
+        <label class="f">電話<input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="例：0912-345-678" required></label>
+        <label class="f">地區<input name="area" maxlength="20" placeholder="例：楠梓區"></label>
+      </div>
+      <fieldset class="chips"><legend>方便接電話的時段</legend>
+        <label><input type="radio" name="time" value="上午">上午</label><label><input type="radio" name="time" value="下午">下午</label><label><input type="radio" name="time" value="晚上">晚上</label><label><input type="radio" name="time" value="都可以" checked>都可以</label>
+      </fieldset>
+      <fieldset class="chips"><legend>想做的窗簾<small>（可複選，不確定可不選）</small></legend>
+        <label><input type="checkbox" name="types" value="布簾">布簾</label><label><input type="checkbox" name="types" value="蜂巢簾">蜂巢簾</label><label><input type="checkbox" name="types" value="調光簾">調光簾</label><label><input type="checkbox" name="types" value="捲簾">捲簾</label><label><input type="checkbox" name="types" value="直立柔紗簾">直立柔紗簾</label><label><input type="checkbox" name="types" value="橫式柔紗簾">橫式柔紗簾</label><label><input type="checkbox" name="types" value="羅馬簾">羅馬簾</label><label><input type="checkbox" name="types" value="片簾">片簾</label><label><input type="checkbox" name="types" value="百葉窗">百葉窗</label>
+      </fieldset>
+      <label class="f">想說的話<textarea name="msg" rows="3" maxlength="500" placeholder="例：客廳落地窗兩扇，西曬，想要遮光"></textarea></label>
+      <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="ask-note">資料只用來聯絡你丈量與報價。</p>
+      <button class="cta" type="submit">送出，等我們回電</button>
+      <p class="ask-msg" role="status" aria-live="polite"></p>
+    </form>
   </article>
 </div>
 
@@ -321,13 +365,41 @@ document.addEventListener('click',e=>{
   const ln=e.target.closest('a[href*="line.me/"]');
   if(ln&&!matchMedia('(pointer:coarse)').matches){e.preventDefault();lineDlg.showModal();return}
   const t=e.target.closest('[data-tab]:is(button),[data-go]');
-  if(t){e.preventDefault();openTag(t.dataset.tab||t.dataset.go);return}
+  if(t){e.preventDefault();openTag(t.dataset.tab||t.dataset.go);
+    if(t.dataset.focus) gsap.delayedCall(reduce?0:.5,()=>{$('#'+t.dataset.focus).scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});$('#ask [name=name]').focus({preventScroll:true})});
+    return}
   if(e.target.closest('#brand')){e.preventDefault();closeTags()}
 });
 tags.addEventListener('keydown',e=>{
   if(!['ArrowDown','ArrowUp','ArrowLeft','ArrowRight'].includes(e.key))return;
   const b=$$('#tags button'),i=b.indexOf(document.activeElement);if(i<0)return;
   const n=b[(i+(e.key==='ArrowDown'||e.key==='ArrowRight'?1:b.length-1))%b.length];n.focus();n.click();e.preventDefault();
+});
+
+/* ── 留電話回電表單：送到 Cloudflare 收件程式（cloudflare/functions/api/inquiry.js），由它推播到老闆的 LINE。
+   GitHub Pages 預覽版沒有收件程式，按送出只顯示提示、改請客戶用 LINE／電話。 ── */
+const ASK_API=location.hostname.endsWith('github.io')||location.protocol==='file:'?'':'/api/inquiry';
+const ask=$('#ask'),askMsg=ask.querySelector('.ask-msg'),askBtn=ask.querySelector('button[type=submit]');
+const LINE_A='<a href="https://line.me/R/ti/p/@776upcvd" target="_blank" rel="noopener">LINE</a>',TEL_A='<a href="tel:0919773142">0919-773-142</a>';
+const say=(cls,html)=>{askMsg.className='ask-msg '+cls;askMsg.innerHTML=html};
+ask.addEventListener('input',e=>{if(e.target.matches('[aria-invalid]'))e.target.removeAttribute('aria-invalid')});
+ask.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const fd=new FormData(ask),name=fd.get('name').trim(),phone=fd.get('phone').trim();
+  const bad=[];
+  if(!name) bad.push(ask.elements.name);
+  if(phone.replace(/\D/g,'').length<8) bad.push(ask.elements.phone);
+  bad.forEach(i=>i.setAttribute('aria-invalid','true'));
+  if(bad.length){say('err',bad[0].name==='name'?'請填稱呼，我們回電時才知道怎麼稱呼你。':'請填可以接到的電話號碼。');bad[0].focus();return}
+  if(!ASK_API){say('err',`預覽版還沒開通回電表單，請先用 ${LINE_A} 或打 ${TEL_A}。`);return}
+  const data={name,phone,area:fd.get('area').trim(),time:fd.get('time'),types:fd.getAll('types'),msg:fd.get('msg').trim(),website:fd.get('website')};
+  askBtn.disabled=true;say('','送出中…');
+  try{
+    const r=await fetch(ASK_API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(data)});
+    if(!r.ok) throw new Error(r.status);
+    ask.reset();ask.querySelectorAll('[aria-invalid]').forEach(i=>i.removeAttribute('aria-invalid'));say('ok',`收到了，謝謝 ${name.replace(/[<>&"]/g,'')}！我們會在${data.time==='都可以'?'近日':'你方便的'+data.time+'時段'}打給你。<br>急的話也可以直接打 ${TEL_A}。`);
+  }catch(err){say('err',`沒有送出去（可能是網路不穩）。請再按一次，或改用 ${LINE_A}、打 ${TEL_A}。`)}
+  finally{askBtn.disabled=false}
 });
 
 /* ── 開場：logo 一筆畫完 → 標語由左往右被照亮 → 金色光線掃過 → logo 飛到左上、紗簾拉開 ── */
